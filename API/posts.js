@@ -99,4 +99,23 @@ const updateReaction = (app, Posts) => {
     })
 }
 
-module.exports = { postStatus, getStatus, getStatusHome, updateReaction }
+const getDetails = (app, Posts) => {
+    app.get("/post/:id", async (req, res) => {
+        try {
+            const { id } = req.params;
+            const query = { _id: ObjectId(id) };
+            const result = await Posts.findOne(query);
+            res.send({
+                success: true,
+                data: result
+            })
+        } catch (error) {
+            res.send({
+                success: false,
+                message: error.message
+            })
+        }
+    })
+}
+
+module.exports = { postStatus, getStatus, getStatusHome, updateReaction, getDetails }

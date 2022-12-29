@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient } = require('mongodb');
 const { getUsers, postUser } = require('./API/users');
-const { postStatus, getStatus, updateReaction, getStatusHome } = require('./API/posts');
+const { postStatus, getStatus, updateReaction, getStatusHome, getDetails } = require('./API/posts');
 require('dotenv').config();
 
 const app = express();
@@ -40,6 +40,7 @@ postUser(app, Users);
 postStatus(app, Posts);
 getStatus(app, Posts);
 getStatusHome(app, Posts)
+getDetails(app, Posts)
 updateReaction(app, Posts);
 app.get("/", (req, res) => {
     res.send("Server Is Running")
