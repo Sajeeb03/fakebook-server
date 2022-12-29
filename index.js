@@ -3,6 +3,7 @@ const cors = require('cors');
 const { MongoClient } = require('mongodb');
 const { getUsers, postUser } = require('./API/users');
 const { postStatus, getStatus, updateReaction, getStatusHome, getDetails } = require('./API/posts');
+const { aboutMe, getAboutMe } = require('./API/about');
 require('dotenv').config();
 
 const app = express();
@@ -30,6 +31,7 @@ dbConnect();
 //collections
 const Users = client.db("fakebook").collection("users");
 const Posts = client.db("fakebook").collection("posts");
+const About = client.db("fakebook").collection("about")
 
 //user operations
 getUsers(app, Users);
@@ -42,6 +44,11 @@ getStatus(app, Posts);
 getStatusHome(app, Posts)
 getDetails(app, Posts)
 updateReaction(app, Posts);
+
+//about 
+
+aboutMe(app, About);
+getAboutMe(app, About)
 app.get("/", (req, res) => {
     res.send("Server Is Running")
 })
