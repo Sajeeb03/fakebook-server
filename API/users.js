@@ -7,7 +7,6 @@ const postUser = (app, Users) => {
             const filter = { email: email }
             const update = {
                 $set: user
-
             }
             const result = await Users.updateOne(filter, update, { upsert: true });
             res.send({
